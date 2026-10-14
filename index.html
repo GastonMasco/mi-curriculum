@@ -1092,6 +1092,11 @@
         localeDiv.textContent = translations[lang].localeDetected(userLang);
       }
 
+      // Update portfolio links to preserve selected language
+      document.querySelectorAll('a[href^="portfolio.html"]').forEach(a => {
+        a.href = `portfolio.html?lang=${lang}`;
+      });
+
       // Update typing effect words
       texts = translations[lang].typing;
       count = 0;
