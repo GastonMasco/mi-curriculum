@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     /* VARIABLES DE DISEÑO */
@@ -114,7 +117,8 @@
 
     .achievements-title { font-size: 0.75rem; text-transform: uppercase; color: var(--accent-color); font-weight: 700; letter-spacing: 1px; }
     .achievements-list { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-    .achieve-badge { background: var(--bg-secondary); width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 1rem; border: 1px solid var(--card-border); }
+    .achieve-badge { background: var(--bg-secondary); width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 1.5rem; border: 1px solid var(--card-border); transition: transform 0.3s; }
+    .achieve-badge:hover { transform: scale(1.1); border-color: var(--accent-color); }
 
     .profile-right { width: 250px; display: flex; flex-direction: column; gap: 2rem; }
     .activity-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; margin-top: 8px; }
@@ -183,28 +187,77 @@
 
     /* PRINT */
     @media print {
-      body { background: #fff !important; color: #000 !important; font-size: 10pt; }
-      .navbar, .scroll-progress, #particleCanvas, .nav-toggle, .xp-bar-container, .achievements-title, .achievements-list, .activity-grid, .mac-header, .cursor, .hero-skill-blocks, .footer, .btn, .profile-card { display: none !important; }
+      @page { size: legal; margin: 0.4cm; }
+      body { background: #fff !important; color: #000 !important; font-size: 8.8pt; line-height: 1.1; margin: 0 !important; padding: 0 !important; }
+      .navbar, .scroll-progress, #particleCanvas, .nav-toggle, .xp-bar-container, .achievements-title, .achievements-list, .activity-grid, .mac-header, .cursor, .hero-skill-blocks, .footer, .btn, .profile-card, #contact { display: none !important; }
       .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
-      .section { padding: 1.5rem 0 !important; min-height: auto !important; display: block !important; page-break-inside: avoid; }
-      .card { background: transparent !important; border: none !important; padding: 0 !important; margin-bottom: 1rem !important; box-shadow: none !important; transform: none !important; }
-      .section-title { font-size: 1.2rem !important; color: #000 !important; border-bottom: 2px solid #333 !important; padding-bottom: 5px !important; margin-bottom: 1rem !important; text-transform: uppercase !important; }
+      .section { padding: 0.1rem 0 !important; margin: 0 !important; min-height: auto !important; display: block !important; border: none !important; }
+      .card { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; transform: none !important; }
+      .section-title { font-size: 3.0mm !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding-bottom: 1px !important; margin-bottom: 0.3rem !important; margin-top: 0.6rem !important; text-transform: uppercase !important; font-weight: 800 !important; }
       .section-title .icon { display: none; }
-      .print-header { display: block !important; margin-bottom: 2rem; border-bottom: 2px solid #000 !important; }
-      .timeline-header { display: flex !important; justify-content: space-between !important; align-items: baseline !important; width: 100% !important; }
-      .timeline-item { border-left: none !important; padding-left: 0 !important; margin-bottom: 1.5rem !important; }
-      .timeline-item::before { display: none; }
-      .tag { border: 1px solid #ddd !important; background: #f9f9f9 !important; color: #333 !important; font-size: 8pt !important; }
-      .skill-bar { height: 4px !important; border: 1px solid #eee !important; background: #f0f0f0 !important; }
-      .skill-bar-fill { background: #444 !important; }
-      .reveal { opacity: 1 !important; transform: none !important; }
-      h1, h2, h3 { color: #000 !important; }
-      .timeline-role { font-size: 1.1rem !important; }
-      .timeline-date { font-size: 0.9rem !important; font-weight: normal !important; color: #555 !important; }
+      .print-header { display: block !important; margin-bottom: 0.8rem !important; border-bottom: 2px solid #000 !important; padding-bottom: 0.2rem !important; }
+      .print-header-top { display: flex !important; justify-content: space-between !important; align-items: center !important; }
+      .timeline-header { display: flex !important; justify-content: space-between !important; align-items: baseline !important; width: 100% !important; margin-bottom: 0rem !important; }
+      .timeline { border: none !important; padding-left: 0 !important; margin-left: 0 !important; gap: 0.6rem !important; display: block !important; }
+      .timeline-item { border: none !important; padding-left: 0 !important; margin-bottom: 0.6rem !important; border-bottom: 1px solid #eee !important; padding-bottom: 0.4rem !important; position: static !important; }
+      .timeline-item::before, .timeline-item::after { display: none !important; }
+      .timeline-tags, .tag, .mac-header { display: none !important; }
+      .skill-bar { height: 2px !important; border: 1px solid #ddd !important; background: #f0f0f0 !important; margin-top: 0px !important; }
+      .skill-bar-fill { background: #000 !important; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      h1 { font-size: 4.5mm !important; color: #000 !important; margin: 0 !important; }
+      h2 { font-size: 3.0mm !important; color: #000 !important; }
+      h3 { font-size: 3.0mm !important; color: #000 !important; }
+      .timeline-role { font-size: 3.0mm !important; font-weight: 700 !important; margin-bottom: 1px !important; }
+      .timeline-date { font-size: 3.0mm !important; font-weight: normal !important; color: #000 !important; margin-bottom: 2px !important; }
+      .timeline-company { font-size: 3.0mm !important; color: #000 !important; font-weight: 600 !important; margin-bottom: 1px !important; }
+      .timeline-desc { font-size: 2.2mm !important; margin-bottom: 0.15rem !important; line-height: 1.2 !important; color: #333 !important; }
+      .timeline-details { font-size: 2.2mm !important; color: #555 !important; margin-bottom: 0.1rem !important; }
+      .timeline-bullets { margin-bottom: 0.1rem !important; padding-left: 0rem !important; column-count: 2; column-gap: 1.5rem; list-style-type: none !important; }
+      .timeline-bullets li { margin-bottom: 0.1rem !important; font-size: 2.2mm !important; line-height: 1.1 !important; padding-left: 0 !important; color: #333 !important; }
+      .timeline-bullets li::before { display: none !important; }
+      p { font-size: 2.2mm !important; margin: 0 0 0.1rem 0 !important; color: #333 !important; }
+      #about p { font-size: 2.2mm !important; margin-bottom: 6px !important; }
+      .skills-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0.5rem !important; }
+      .skill-item { margin-bottom: 0.2rem !important; }
+      #about .container, #about .grid { display: block !important; }
+      #about p { margin-bottom: 10px !important; }
     }
     .print-header { display: none; width: 100%; border-bottom: 3px solid var(--accent-color); padding-bottom: 1rem; }
     .print-header-top { display: flex; justify-content: space-between; align-items: flex-start; }
     .print-contact { text-align: right; font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+    .lang-switch-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2px 4px;
+      gap: 2px;
+      margin-left: 0.5rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      line-height: 1;
+    }
+    .lang-btn:hover {
+      color: var(--accent-color);
+    }
+    .lang-btn.active {
+      background: var(--accent-color);
+      color: var(--bg-color);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
 
     @media (max-width: 900px) {
       .profile-card { flex-direction: column; align-items: center; text-align: center; }
@@ -212,9 +265,11 @@
       .profile-name { justify-content: center; }
     }
     @media (max-width: 768px) {
-      .nav-links { position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-secondary); flex-direction: column; display: none; border-bottom: 1px solid var(--card-border); }
+      .nav-links { position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-secondary); flex-direction: column; display: none; border-bottom: 1px solid var(--card-border); padding: 1rem 0; }
       .nav-links.active { display: flex; }
-      .nav-links a { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+      .nav-links a { padding: 1.2rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+      .lang-switch-pill { margin: 1rem auto 0.5rem auto; }
+      .btn-download { margin: 0.5rem auto !important; }
       .nav-toggle { display: block; }
     }
   </style>
@@ -228,14 +283,21 @@
     <div class="navbar-container">
       <a href="#" class="navbar-brand">&lt;GRMM<span>/</span>&gt;</a>
       <div class="nav-links" id="navLinks">
-        <a href="#about">Sobre Mí</a>
-        <a href="#experience">Experiencia</a>
-        <a href="#education">Formación</a>
-        <a href="#skills">Habilidades</a>
-        <a href="#languages">Idiomas</a>
-        <a href="portfolio.html" target="_blank" style="color: var(--accent-color); font-weight: 700;">Portafolio ↗</a>
-        <a href="#contact">Contacto</a>
-        <a href="javascript:window.print()" class="btn-download" style="color: var(--accent-color); border: 1px solid var(--accent-color); padding: 4px 12px; border-radius: 4px; margin-left: 1rem; font-size: 0.8rem; text-decoration: none;">EXPORTAR .PDF</a>
+        <a href="#about" data-i18n="nav.about">Sobre Mí</a>
+        <a href="#experience" data-i18n="nav.experience">Experiencia</a>
+        <a href="#education" data-i18n="nav.education">Formación</a>
+        <a href="#skills" data-i18n="nav.skills">Habilidades</a>
+        <a href="#languages" data-i18n="nav.languages">Idiomas</a>
+        <a href="portfolio.html" target="_blank" data-i18n="nav.portfolio" style="color: var(--accent-color); font-weight: 700;">Portafolio ↗</a>
+        <a href="#contact" data-i18n="nav.contact">Contacto</a>
+        
+        <!-- Pestaña Selector de Idioma ES / EN -->
+        <div class="lang-switch-pill" id="langSwitch" role="group" aria-label="Selector de idioma / Language selector">
+          <button type="button" class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
+          <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+
+        <a href="javascript:window.print()" class="btn-download" data-i18n="nav.export" style="color: var(--accent-color); border: 1px solid var(--accent-color); padding: 4px 12px; border-radius: 4px; margin-left: 0.5rem; font-size: 0.8rem; text-decoration: none;">EXPORTAR .PDF</a>
       </div>
       <button class="nav-toggle" id="navToggle">☰</button>
     </div>
@@ -246,17 +308,12 @@
     <header class="print-header">
       <div class="print-header-top">
         <div>
-          <h1 style="font-size: 2.2rem; margin: 0;">Gaston Ricardo Masco Mamani</h1>
-          <p style="font-size: 1.1rem; opacity: 0.8; margin-top: 5px;">Ingeniero Civil | Especialista en Modelado BIM & Estructuras</p>
+          <h1 style="font-size: 1.3rem; margin: 0; color: #000;">Gaston Ricardo Masco Mamani</h1>
+          <p style="font-size: 0.8rem; margin: 0; color: #333;" data-i18n="print.role">Ingeniero Civil | BIM & Estructuras</p>
         </div>
         <div class="print-contact">
-          <p>mascogaston@gmail.com</p>
-          <p>69761627</p>
-          <p>El Alto, La Paz, Bolivia</p>
-          <p>
-            <a href="https://www.linkedin.com/in/gaston-ricardo-masco-b9239a198/">LinkedIn</a> · 
-            <a href="#">GitHub</a>
-          </p>
+          <p style="margin: 0; font-size: 0.75rem;">mascogaston@gmail.com | (+591) 69761627 | La Paz, Bolivia</p>
+          <p style="margin: 0; font-size: 0.65rem;">linkedin.com/in/gaston-ricardo-masco-b9239a198/</p>
         </div>
       </div>
     </header>
@@ -274,8 +331,9 @@
           </div>
           <div class="level-badge">LEVEL 9</div>
           <div class="social-links">
-            <a href="https://www.linkedin.com/in/gaston-ricardo-masco-b9239a198/" target="_blank" title="LinkedIn">in</a>
-            <a href="mailto:mascogaston@gmail.com" title="Email">@</a>
+            <a href="https://www.linkedin.com/in/gaston-ricardo-masco-b9239a198/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://wa.me/59169761627" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:mascogaston@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
           </div>
           <div style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono);">RNI: 56721</div>
         </div>
@@ -286,29 +344,18 @@
             Gaston Masco <span class="profile-handle">@gaston_ricardo</span>
           </h1>
           <p class="profile-role">
-            Ingeniero Civil | // <span id="typingText"></span><span class="cursor"></span>
+            <span data-i18n="hero.rolePrefix">Ingeniero Civil | // </span><span id="typingText"></span><span class="cursor"></span>
           </p>
-          <p class="profile-desc">
-            Ingeniero Civil especializado en modelado BIM y estructuras. Experto en optimización de procesos mediante automatización (Dynamo) y diseño estructural avanzado. Con trayectoria en grandes proyectos de infraestructura y edificación en Bolivia, Guatemala y Perú.
+          <p class="profile-desc" data-i18n="hero.desc">
+            Ingeniero Civil especializado en modelado BIM y estructuras. Experto en optimización de procesos mediante automatización (Dynamo) y diseño estructural avanzado. Con trayectoria en grandes proyectos de infraestructura y edificación en Bolivia, Guatemala, Perú, España y EEUU.
           </p>
           
-          <div style="margin-bottom: 2.5rem; display: flex; gap: 1rem;">
-            <a href="portfolio.html" target="_blank" style="background: var(--accent-color); color: var(--bg-color); padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: transform 0.3s;">VER PORTAFOLIO VISUAL ↗</a>
-            <a href="#contact" style="border: 1px solid var(--card-border); color: var(--text-color); padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.3s;">CONTACTAR</a>
-          </div>
-          
-          <div class="xp-bar-container">
-            <div class="xp-text">
-              <span>BIM Professional Mastery</span>
-              <span>92% XP</span>
-            </div>
-            <div class="xp-bar">
-              <div class="xp-fill"></div>
-            </div>
+          <div style="margin-bottom: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="portfolio.html" target="_blank" data-i18n="hero.btnPortfolio" style="background: var(--accent-color); color: var(--bg-color); padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: transform 0.3s;">VER PORTAFOLIO VISUAL ↗</a>
+            <a href="#contact" data-i18n="hero.btnContact" style="border: 1px solid var(--card-border); color: var(--text-color); padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.3s;">CONTACTAR</a>
           </div>
           
           <div>
-            <span class="achievements-title">Achievements</span>
             <div class="achievements-list">
               <span class="achieve-badge" title="Expert Structural Designer">🏗️</span>
               <span class="achieve-badge" title="BIM Mastery">📐</span>
@@ -321,28 +368,28 @@
         <!-- Right: Activity & Skills -->
         <div class="profile-right">
           <div>
-             <span class="achievements-title">Activity <span style="color: var(--text-muted); text-transform:none; font-weight:normal;">last 90 Days</span></span>
+             <span class="achievements-title" data-i18n="hero.activity">Activity <span style="color: var(--text-muted); text-transform:none; font-weight:normal;">last 90 Days</span></span>
              <div class="activity-grid" id="activityGrid"></div>
           </div>
           
           <div>
-            <span class="achievements-title">Top Skills</span>
+            <span class="achievements-title" data-i18n="hero.topSkills">Top Skills</span>
             <div style="display: flex; flex-direction: column; margin-top: 8px;">
               <div class="hero-skill-row">
-                <span class="hero-skill-name">Modelado BIM</span>
+                <span class="hero-skill-name" data-i18n="hero.s1">Especialista en Estructuras</span>
                 <div class="hero-skill-blocks" data-level="10"></div>
               </div>
               <div class="hero-skill-row">
-                <span class="hero-skill-name">Dynamo Scripting</span>
-                <div class="hero-skill-blocks" data-level="8"></div>
+                <span class="hero-skill-name" data-i18n="hero.s2">Coordinación BIM</span>
+                <div class="hero-skill-blocks" data-level="10"></div>
               </div>
               <div class="hero-skill-row">
-                <span class="hero-skill-name">Diseño Estructural</span>
+                <span class="hero-skill-name" data-i18n="hero.s3">Modelador BIM</span>
+                <div class="hero-skill-blocks" data-level="10"></div>
+              </div>
+              <div class="hero-skill-row">
+                <span class="hero-skill-name" data-i18n="hero.s4">Agentes IA & Workflows</span>
                 <div class="hero-skill-blocks" data-level="9"></div>
-              </div>
-              <div class="hero-skill-row">
-                <span class="hero-skill-name">BIM 360 / ACC</span>
-                <div class="hero-skill-blocks" data-level="10"></div>
               </div>
             </div>
           </div>
@@ -355,22 +402,22 @@
   <!-- Sobre Mí -->
   <section class="section" id="about">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">01.</span> Sobre Mí</h2>
+      <h2 class="section-title" data-i18n="about.title"><span class="icon">01.</span> Sobre Mí</h2>
       <div class="card">
         <div class="mac-header">
           <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
         </div>
-        <p style="font-size:1.05rem; color:var(--text-color); margin-bottom: 25px; line-height: 1.8;">
+        <p style="font-size:1.05rem; color:var(--text-color); margin-bottom: 25px; line-height: 1.8;" data-i18n="about.desc">
           Ingeniero Civil graduado de la Universidad Mayor de San Andrés (UMSA). Poseo un conocimiento profundo en el diseño de estructuras de hormigón y metálicas, así como en técnicas avanzadas de modelación estructural mediante computación. Mi enfoque combina la ingeniería tradicional con las tecnologías BIM más punteras para resolver comportamientos estructurales complejos.
         </p>
         <div class="grid">
           <ul style="list-style: none; color: var(--text-muted);">
-            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;"><span style="color:var(--accent-color)">▹</span> Diseño de estructuras de hormigón y acero.</li>
-            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;"><span style="color:var(--accent-color)">▹</span> Modelado BIM Avanzado (LOD 400).</li>
+            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;" data-i18n="about.b1"><span style="color:var(--accent-color)">▹</span> Diseño de estructuras de hormigón y acero.</li>
+            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;" data-i18n="about.b2"><span style="color:var(--accent-color)">▹</span> Modelado BIM Avanzado (LOD 400).</li>
           </ul>
           <ul style="list-style: none; color: var(--text-muted);">
-            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;"><span style="color:var(--accent-color)">▹</span> Automatización de flujos con Dynamo.</li>
-            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;"><span style="color:var(--accent-color)">▹</span> Planificación y coordinación 4D/5D.</li>
+            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;" data-i18n="about.b3"><span style="color:var(--accent-color)">▹</span> Automatización de flujos con Dynamo.</li>
+            <li style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;" data-i18n="about.b4"><span style="color:var(--accent-color)">▹</span> Planificación y coordinación 4D/5D.</li>
           </ul>
         </div>
       </div>
@@ -380,23 +427,23 @@
   <!-- Experiencia Profesional -->
   <section class="section" id="experience">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">02.</span> Experiencia Profesional</h2>
+      <h2 class="section-title" data-i18n="exp.title"><span class="icon">02.</span> Experiencia Profesional</h2>
       <div class="timeline">
         
         <!-- Proyecto 1 -->
         <div class="timeline-item reveal">
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-            <div class="timeline-date">Octubre 2024 — Presente</div>
-            <h3 class="timeline-role">Coordinador, Especialista en Estructuras y Modelador BIM</h3>
+            <div class="timeline-date" data-i18n="exp.p1.date">Octubre 2024 — Presente</div>
+            <h3 class="timeline-role" data-i18n="exp.p1.role">Coordinador, Especialista en Estructuras y Modelador BIM</h3>
             <div class="timeline-company">Carmon Inversiones Inmobiliarias</div>
-            <div class="timeline-details">España · Remoto · Profesional independiente</div>
-            <p class="timeline-desc">Gestión integral de procesos BIM para proyectos de inversión inmobiliaria. Implementación de automatizaciones con Revit API y desarrollo de herramientas personalizadas para optimización de flujos de trabajo.</p>
+            <div class="timeline-details" data-i18n="exp.p1.details">España · Remoto · Profesional independiente</div>
+            <p class="timeline-desc" data-i18n="exp.p1.desc">Gestión integral de procesos BIM para proyectos de inversión inmobiliaria. Implementación de automatizaciones con Revit API y desarrollo de herramientas personalizadas para optimización de flujos de trabajo.</p>
             <ul class="timeline-bullets">
-              <li>Automatización de procesos BIM con Revit API (C# y Python)</li>
-              <li>Optimización de modelado e información de proyectos</li>
-              <li>Desarrollo de plugins personalizados para productividad</li>
-              <li>Implementación de estándares BIM corporativos</li>
+              <li data-i18n="exp.p1.b1">Automatización de procesos BIM con Revit API (C# y Python)</li>
+              <li data-i18n="exp.p1.b2">Optimización de modelado e información de proyectos</li>
+              <li data-i18n="exp.p1.b3">Desarrollo de plugins personalizados para productividad</li>
+              <li data-i18n="exp.p1.b4">Implementación de estándares BIM corporativos</li>
             </ul>
             <div class="timeline-tags">
               <span class="tag">Revit API</span><span class="tag">C#</span><span class="tag">Python</span><span class="tag">BIM Management</span><span class="tag">Dynamo</span>
@@ -408,16 +455,16 @@
         <div class="timeline-item reveal">
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-            <div class="timeline-date">Mayo 2024 — Agosto 2024</div>
-            <h3 class="timeline-role">Especialista en Automatización de Plantas</h3>
+            <div class="timeline-date" data-i18n="exp.p2.date">Mayo 2024 — Agosto 2024</div>
+            <h3 class="timeline-role" data-i18n="exp.p2.role">Especialista en Automatización de Plantas</h3>
             <div class="timeline-company">MRV Servicios S.R.L.</div>
-            <div class="timeline-details">Bolivia · Presencial · Jornada completa</div>
-            <p class="timeline-desc">Automatización y optimización de procesos en modelado e información, cálculos métricos BIM y elaboración de presupuestos.</p>
+            <div class="timeline-details" data-i18n="exp.p2.details">Bolivia · Presencial · Jornada completa</div>
+            <p class="timeline-desc" data-i18n="exp.p2.desc">Automatización y optimización de procesos en modelado e información, cálculos métricos BIM y elaboración de presupuestos.</p>
             <ul class="timeline-bullets">
-              <li>Coordinación de proyectos de construcción: Plantas Cochabamba, La Paz y Senkata (Etanol)</li>
-              <li>Fabricación y montaje de diluidores de asfalto y termotanques</li>
-              <li>Armado de propuestas para el Sistema de Licitaciones SICOES</li>
-              <li>Cuantificaciones BIM con Revit y análisis de precios unitarios</li>
+              <li data-i18n="exp.p2.b1">Coordinación de proyectos de construcción: Plantas Cochabamba, La Paz y Senkata (Etanol)</li>
+              <li data-i18n="exp.p2.b2">Fabricación y montaje de diluidores de asfalto y termotanques</li>
+              <li data-i18n="exp.p2.b3">Armado de propuestas para el Sistema de Licitaciones SICOES</li>
+              <li data-i18n="exp.p2.b4">Cuantificaciones BIM con Revit y análisis de precios unitarios</li>
             </ul>
             <div class="timeline-tags">
               <span class="tag">Revit</span><span class="tag">Dynamo</span><span class="tag">SICOES</span><span class="tag">Presupuestos BIM</span><span class="tag">Coordinación</span>
@@ -429,15 +476,102 @@
         <div class="timeline-item reveal">
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-            <div class="timeline-date">Septiembre 2022 — Mayo 2023</div>
-            <h3 class="timeline-role">Ingeniero de Implementación BIM</h3>
+            <div class="timeline-date" data-i18n="exp.p3.date">Septiembre 2022 — Mayo 2023</div>
+            <h3 class="timeline-role" data-i18n="exp.p3.role">Ingeniero de Implementación BIM</h3>
             <div class="timeline-company">Pirámide Ingeniería y Construcción S.R.L.</div>
-            <div class="timeline-details">Bolivia · Presencial</div>
-            <p class="timeline-desc">Diseño de elementos estructurales especiales para el Parque Lineal Metropolitano La Paz - El Alto.</p>
+            <div class="timeline-details" data-i18n="exp.p3.details">Bolivia · Presencial</div>
+            <p class="timeline-desc" data-i18n="exp.p3.desc">Diseño de elementos estructurales especiales para el Parque Lineal Metropolitano La Paz - El Alto.</p>
             <ul class="timeline-bullets">
-              <li>Modelado de estructuras complejas para ciclovías y puentes</li>
-              <li>Cálculo y diseño de elementos estructurales no convencionales</li>
-              <li>Coordinación técnica con equipos de obra</li>
+              <li data-i18n="exp.p3.b1">Modelado de estructuras complejas para ciclovías y puentes</li>
+              <li data-i18n="exp.p3.b2">Cálculo y diseño de elementos estructurales no convencionales</li>
+              <li data-i18n="exp.p3.b3">Coordinación técnica con equipos de obra</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Nuevos Proyectos Añadidos -->
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p4.date">Junio 2025 — Octubre 2025</div>
+            <h3 class="timeline-role" data-i18n="exp.p4.role">Ingeniería a Detalle - Sistema Recepción Combustibles</h3>
+            <div class="timeline-company">MRV Servicios S.R.L.</div>
+            <p class="timeline-desc" data-i18n="exp.p4.desc">Diseño y servicio de ingeniería para planta Villamontes.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p5.date">Septiembre 2024 — Octubre 2024</div>
+            <h3 class="timeline-role" data-i18n="exp.p5.role">Consultor Estructural y BIM</h3>
+            <div class="timeline-company" data-i18n="exp.p5.company">Consultor Independiente</div>
+            <p class="timeline-desc" data-i18n="exp.p5.desc">Modelado de Puentes (Perú) y Diseño de Cubiertas de gran Luz (Santa Cruz y La Paz).</p>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p5.b1">Proyectos BIOSAN: Cálculo de conexiones y fundaciones</li>
+              <li data-i18n="exp.p5.b2">IMCRUZ: Modelado de cubierta metálica y sistema hidrosanitario</li>
+              <li data-i18n="exp.p5.b3">Parque de Esferas: Coordinación de modelos en Nube de Puntos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p6.date">Agosto 2023 — Junio 2024</div>
+            <h3 class="timeline-role" data-i18n="exp.p6.role">Diseño y Modelado BIM de Estructuras</h3>
+            <div class="timeline-company" data-i18n="exp.p6.company">MRV Servicios S.R.L. / Independiente</div>
+            <p class="timeline-desc" data-i18n="exp.p6.desc">Proyectos de infraestructura industrial y vial.</p>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p6.b1">Modelos BIM 4D de 18 viaductos (Unduavi-Chulumani)</li>
+              <li data-i18n="exp.p6.b2">Ingeniería constructiva y montaje en Refinería Gualberto Villarroel</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p7.date">Junio 2023 — Febrero 2024</div>
+            <h3 class="timeline-role" data-i18n="exp.p7.role">Especialista BIM en Infraestructura</h3>
+            <div class="timeline-company">CBI Contratistas Generales S.A. / Pirámide S.R.L.</div>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p7.b1">Puente Vehicular Belice II (Guatemala) - Modelado BIM</li>
+              <li data-i18n="exp.p7.b2">Hospitales de Segundo Nivel (Villazón, Tupiza, Camiri, Monteagudo)</li>
+              <li data-i18n="exp.p7.b3">Centro de Operación Cuartos Villazón (Potosí)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p8.date">Agosto 2022 — Febrero 2023</div>
+            <h3 class="timeline-role" data-i18n="exp.p8.role">Modelado de Edificaciones y Estructuras Metálicas</h3>
+            <div class="timeline-company">Las Loritas S.R.L. / FIJY Fundación</div>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p8.b1">Edificio Loritas 10 (35 niveles) y Youts Building I y II (13 niveles)</li>
+              <li data-i18n="exp.p8.b2">Estructuras Metálicas: 6 West End Court-Steel Stair</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p9.date">Febrero 2020 — Febrero 2022</div>
+            <h3 class="timeline-role" data-i18n="exp.p9.role">Ingeniería Estructural y BIM</h3>
+            <div class="timeline-company" data-i18n="exp.p9.company">Enmarco AEC Project / Proyecto de Grado</div>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p9.b1">Escuela Pública Felipe Guaman Poma de Ayala (Ayacucho - PERÚ)</li>
+              <li data-i18n="exp.p9.b2">Tesis de Grado: Análisis y Modelado BIM Edificio San Antonio (100/100)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="card">
+            <div class="timeline-date" data-i18n="exp.p10.date">Agosto 2019 — Octubre 2021</div>
+            <h3 class="timeline-role" data-i18n="exp.p10.role">Diseño de Estructuras e Infraestructura Vial</h3>
+            <div class="timeline-company" data-i18n="exp.p10.company">Independiente (Colab. Ronald Lucio Sócrates Ruiz Velasco)</div>
+            <ul class="timeline-bullets">
+              <li data-i18n="exp.p10.b1">Ciudadela Judicial de Sucre (TSJ, TCP, TAA, FGE)</li>
+              <li data-i18n="exp.p10.b2">Puentes: Zona 14 (Guatemala) y Puente Guenda (Santa Cruz)</li>
+              <li data-i18n="exp.p10.b3">Condominio Voluma (Vega Aguirre Consultores)</li>
             </ul>
           </div>
         </div>
@@ -449,18 +583,18 @@
   <!-- Formación Académica -->
   <section class="section" id="education">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">03.</span> Formación Académica</h2>
+      <h2 class="section-title" data-i18n="edu.title"><span class="icon">03.</span> Formación Académica</h2>
       <div class="timeline">
         
         <div class="timeline-item reveal">
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
             <div class="timeline-header">
-              <div class="timeline-role">Ingeniería Civil</div>
+              <div class="timeline-role" data-i18n="edu.c1.role">Ingeniería Civil</div>
               <div class="timeline-date">2014 — 2019</div>
             </div>
             <div class="timeline-company">Universidad Mayor de San Andrés (UMSA)</div>
-            <p style="color:var(--text-muted);">Título obtenido en Junio 2022. Especialización en Estructuras.</p>
+            <p style="color:var(--text-muted);" data-i18n="edu.c1.desc">Título obtenido en Junio 2022. Especialización en Estructuras.</p>
           </div>
         </div>
 
@@ -468,10 +602,10 @@
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
             <div class="timeline-header">
-              <div class="timeline-role">Diplomado en Ingeniería de Puentes</div>
+              <div class="timeline-role" data-i18n="edu.c2.role">Diplomado en Ingeniería de Puentes</div>
               <div class="timeline-date">2023</div>
             </div>
-            <div class="timeline-company">Siglo XX (800 Horas)</div>
+            <div class="timeline-company" data-i18n="edu.c2.company">Siglo XX (800 Horas)</div>
           </div>
         </div>
 
@@ -479,10 +613,10 @@
           <div class="card">
             <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
             <div class="timeline-header">
-              <div class="timeline-role">Diplomado en Estructuras de Acero</div>
+              <div class="timeline-role" data-i18n="edu.c3.role">Diplomado en Estructuras de Acero</div>
               <div class="timeline-date">2023</div>
             </div>
-            <div class="timeline-company">Universidad Católica Boliviana (UCB) (800 Horas)</div>
+            <div class="timeline-company" data-i18n="edu.c3.company">Universidad Católica Boliviana (UCB) (800 Horas)</div>
           </div>
         </div>
 
@@ -493,46 +627,46 @@
   <!-- Habilidades Técnicas -->
   <section class="section" id="skills">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">04.</span> Habilidades Técnicas</h2>
+      <h2 class="section-title" data-i18n="skills.title"><span class="icon">04.</span> Habilidades Técnicas</h2>
       <div class="skills-grid">
         <div class="card reveal">
           <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-          <h3>Modelado & BIM</h3><br>
+          <h3 data-i18n="skills.cat1">Modelado & BIM</h3><br>
           <div class="skill-item">
-            <div class="skill-header"><span>BIM Estructuras (Revit)</span><span>100%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s1">BIM Estructuras (Revit)</span><span>100%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="100"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>Arquitectura & Sitio</span><span>80%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s2">Arquitectura & Sitio</span><span>80%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>Dynamo (Visual Programming)</span><span>80%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s3">Dynamo (Visual Programming)</span><span>80%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>Autodesk Construction Cloud</span><span>100%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s4">Autodesk Construction Cloud</span><span>100%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="100"></div></div>
           </div>
         </div>
 
         <div class="card reveal">
           <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-          <h3>Ingeniería & Cálculo</h3><br>
+          <h3 data-i18n="skills.cat2">Ingeniería & Cálculo</h3><br>
           <div class="skill-item">
-            <div class="skill-header"><span>Diseño Estructural (Postesados/Metal)</span><span>85%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s5">Diseño Estructural (Postesados/Metal)</span><span>85%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="85"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>MIDAS Civil (Puentes)</span><span>60%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s6">MIDAS Civil (Puentes)</span><span>60%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="60"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>CYPE - Arquímedes (Costos)</span><span>60%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s7">CYPE - Arquímedes (Costos)</span><span>60%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="60"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>Planificación 4D (Synchro Pro)</span><span>90%</span></div>
+            <div class="skill-header"><span data-i18n="skills.s8">Planificación 4D (Synchro Pro)</span><span>90%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="90"></div></div>
           </div>
         </div>
@@ -543,17 +677,17 @@
   <!-- Idiomas -->
   <section class="section" id="languages">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">05.</span> Idiomas</h2>
+      <h2 class="section-title" data-i18n="lang.title"><span class="icon">05.</span> Idiomas</h2>
       <div class="card">
         <div class="mac-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
         <div id="localeDetection" style="margin-bottom: 20px; font-family: var(--font-mono); color: var(--accent-color); font-size: 0.8rem; border-bottom: 1px dashed var(--card-border); padding-bottom: 10px;"></div>
         <div class="skills-grid">
           <div class="skill-item">
-            <div class="skill-header"><span>Español (Nativo)</span><span>100%</span></div>
+            <div class="skill-header"><span data-i18n="lang.s1">Español (Nativo)</span><span>100%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="100"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-header"><span>Inglés (Básico)</span><span>40%</span></div>
+            <div class="skill-header"><span data-i18n="lang.s2">Inglés (Básico)</span><span>40%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-level="40"></div></div>
           </div>
         </div>
@@ -564,19 +698,25 @@
   <!-- Contacto -->
   <section class="section" id="contact">
     <div class="container reveal">
-      <h2 class="section-title"><span class="icon">06.</span> Contacto</h2>
+      <h2 class="section-title" data-i18n="contact.title"><span class="icon">06.</span> Contacto</h2>
       <div class="contact-grid">
         <div class="card contact-item reveal">
-          <div class="contact-icon">✉</div>
-          <a href="mailto:mascogaston@gmail.com" class="contact-value">mascogaston@gmail.com</a>
+          <a href="mailto:mascogaston@gmail.com" class="contact-link" style="text-decoration: none; color: inherit; width: 100%;">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-value">mascogaston@gmail.com</div>
+          </a>
         </div>
         <div class="card contact-item reveal">
-          <div class="contact-icon">📱</div>
-          <a href="tel:69761627" class="contact-value">+591 69761627</a>
+          <a href="https://wa.me/59169761627" target="_blank" class="contact-link" style="text-decoration: none; color: inherit; width: 100%;">
+            <div class="contact-icon" style="color: #25D366;"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-value">+591 69761627</div>
+          </a>
         </div>
         <div class="card contact-item reveal">
-          <div class="contact-icon">🌐</div>
-          <a href="https://www.linkedin.com/in/gaston-ricardo-masco-b9239a198/" class="contact-value">LinkedIn Profile</a>
+          <a href="https://www.linkedin.com/in/gaston-ricardo-masco-b9239a198/" target="_blank" class="contact-link" style="text-decoration: none; color: inherit; width: 100%;">
+            <div class="contact-icon" style="color: #0077b5;"><i class="fab fa-linkedin"></i></div>
+            <div class="contact-value">Gaston Masco</div>
+          </a>
         </div>
       </div>
     </div>
@@ -584,29 +724,392 @@
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="currentYear"></span> Gaston Ricardo Masco Mamani · Ingeniero Civil.</p>
+      <p data-i18n="footer.text">© <span id="currentYear"></span> Gaston Ricardo Masco Mamani · Ingeniero Civil.</p>
     </div>
   </footer>
 
   <script>
+    // Internationalization (i18n) Dictionary
+    const translations = {
+      es: {
+        pageTitle: "Gaston Ricardo Masco Mamani - Ingeniero Civil & BIM Specialist",
+        typing: ["especialista en estructuras", "modelador BIM avanzado", "experto en automatización"],
+        localeDetected: (lang) => `// Región: Hispanohablante detectada (${lang}).`,
+        nav: {
+          about: "Sobre Mí",
+          experience: "Experiencia",
+          education: "Formación",
+          skills: "Habilidades",
+          languages: "Idiomas",
+          portfolio: "Portafolio ↗",
+          contact: "Contacto",
+          export: "EXPORTAR .PDF"
+        },
+        print: {
+          role: "Ingeniero Civil | BIM & Estructuras"
+        },
+        hero: {
+          rolePrefix: "Ingeniero Civil | // ",
+          desc: "Ingeniero Civil especializado en modelado BIM y estructuras. Experto en optimización de procesos mediante automatización (Dynamo) y diseño estructural avanzado. Con trayectoria en grandes proyectos de infraestructura y edificación en Bolivia, Guatemala, Perú, España y EEUU.",
+          btnPortfolio: "VER PORTAFOLIO VISUAL ↗",
+          btnContact: "CONTACTAR",
+          activity: 'Activity <span style="color: var(--text-muted); text-transform:none; font-weight:normal;">last 90 Days</span>',
+          topSkills: "Top Skills",
+          s1: "Especialista en Estructuras",
+          s2: "Coordinación BIM",
+          s3: "Modelador BIM",
+          s4: "Agentes IA & Workflows"
+        },
+        about: {
+          title: '<span class="icon">01.</span> Sobre Mí',
+          desc: "Ingeniero Civil graduado de la Universidad Mayor de San Andrés (UMSA). Poseo un conocimiento profundo en el diseño de estructuras de hormigón y metálicas, así como en técnicas avanzadas de modelación estructural mediante computación. Mi enfoque combina la ingeniería tradicional con las tecnologías BIM más punteras para resolver comportamientos estructurales complejos.",
+          b1: '<span style="color:var(--accent-color)">▹</span> Diseño de estructuras de hormigón y acero.',
+          b2: '<span style="color:var(--accent-color)">▹</span> Modelado BIM Avanzado (LOD 400).',
+          b3: '<span style="color:var(--accent-color)">▹</span> Automatización de flujos con Dynamo.',
+          b4: '<span style="color:var(--accent-color)">▹</span> Planificación y coordinación 4D/5D.'
+        },
+        exp: {
+          title: '<span class="icon">02.</span> Experiencia Profesional',
+          p1: {
+            date: "Octubre 2024 — Presente",
+            role: "Coordinador, Especialista en Estructuras y Modelador BIM",
+            details: "España · Remoto · Profesional independiente",
+            desc: "Gestión integral de procesos BIM para proyectos de inversión inmobiliaria. Implementación de automatizaciones con Revit API y desarrollo de herramientas personalizadas para optimización de flujos de trabajo.",
+            b1: "Automatización de procesos BIM con Revit API (C# y Python)",
+            b2: "Optimización de modelado e información de proyectos",
+            b3: "Desarrollo de plugins personalizados para productividad",
+            b4: "Implementación de estándares BIM corporativos"
+          },
+          p2: {
+            date: "Mayo 2024 — Agosto 2024",
+            role: "Especialista en Automatización de Plantas",
+            details: "Bolivia · Presencial · Jornada completa",
+            desc: "Automatización y optimización de procesos en modelado e información, cálculos métricos BIM y elaboración de presupuestos.",
+            b1: "Coordinación de proyectos de construcción: Plantas Cochabamba, La Paz y Senkata (Etanol)",
+            b2: "Fabricación y montaje de diluidores de asfalto y termotanques",
+            b3: "Armado de propuestas para el Sistema de Licitaciones SICOES",
+            b4: "Cuantificaciones BIM con Revit y análisis de precios unitarios"
+          },
+          p3: {
+            date: "Septiembre 2022 — Mayo 2023",
+            role: "Ingeniero de Implementación BIM",
+            details: "Bolivia · Presencial",
+            desc: "Diseño de elementos estructurales especiales para el Parque Lineal Metropolitano La Paz - El Alto.",
+            b1: "Modelado de estructuras complejas para ciclovías y puentes",
+            b2: "Cálculo y diseño de elementos estructurales no convencionales",
+            b3: "Coordinación técnica con equipos de obra"
+          },
+          p4: {
+            date: "Junio 2025 — Octubre 2025",
+            role: "Ingeniería a Detalle - Sistema Recepción Combustibles",
+            desc: "Diseño y servicio de ingeniería para planta Villamontes."
+          },
+          p5: {
+            date: "Septiembre 2024 — Octubre 2024",
+            role: "Consultor Estructural y BIM",
+            company: "Consultor Independiente",
+            desc: "Modelado de Puentes (Perú) y Diseño de Cubiertas de gran Luz (Santa Cruz y La Paz).",
+            b1: "Proyectos BIOSAN: Cálculo de conexiones y fundaciones",
+            b2: "IMCRUZ: Modelado de cubierta metálica y sistema hidrosanitario",
+            b3: "Parque de Esferas: Coordinación de modelos en Nube de Puntos"
+          },
+          p6: {
+            date: "Agosto 2023 — Junio 2024",
+            role: "Diseño y Modelado BIM de Estructuras",
+            company: "MRV Servicios S.R.L. / Independiente",
+            desc: "Proyectos de infraestructura industrial y vial.",
+            b1: "Modelos BIM 4D de 18 viaductos (Unduavi-Chulumani)",
+            b2: "Ingeniería constructiva y montaje en Refinería Gualberto Villarroel"
+          },
+          p7: {
+            date: "Junio 2023 — Febrero 2024",
+            role: "Especialista BIM en Infraestructura",
+            b1: "Puente Vehicular Belice II (Guatemala) - Modelado BIM",
+            b2: "Hospitales de Segundo Nivel (Villazón, Tupiza, Camiri, Monteagudo)",
+            b3: "Centro de Operación Cuartos Villazón (Potosí)"
+          },
+          p8: {
+            date: "Agosto 2022 — Febrero 2023",
+            role: "Modelado de Edificaciones y Estructuras Metálicas",
+            b1: "Edificio Loritas 10 (35 niveles) y Youts Building I y II (13 niveles)",
+            b2: "Estructuras Metálicas: 6 West End Court-Steel Stair"
+          },
+          p9: {
+            date: "Febrero 2020 — Febrero 2022",
+            role: "Ingeniería Estructural y BIM",
+            company: "Enmarco AEC Project / Proyecto de Grado",
+            b1: "Escuela Pública Felipe Guaman Poma de Ayala (Ayacucho - PERÚ)",
+            b2: "Tesis de Grado: Análisis y Modelado BIM Edificio San Antonio (100/100)"
+          },
+          p10: {
+            date: "Agosto 2019 — Octubre 2021",
+            role: "Diseño de Estructuras e Infraestructura Vial",
+            company: "Independiente (Colab. Ronald Lucio Sócrates Ruiz Velasco)",
+            b1: "Ciudadela Judicial de Sucre (TSJ, TCP, TAA, FGE)",
+            b2: "Puentes: Zona 14 (Guatemala) y Puente Guenda (Santa Cruz)",
+            b3: "Condominio Voluma (Vega Aguirre Consultores)"
+          }
+        },
+        edu: {
+          title: '<span class="icon">03.</span> Formación Académica',
+          c1: {
+            role: "Ingeniería Civil",
+            desc: "Título obtenido en Junio 2022. Especialización en Estructuras."
+          },
+          c2: {
+            role: "Diplomado en Ingeniería de Puentes",
+            company: "Siglo XX (800 Horas)"
+          },
+          c3: {
+            role: "Diplomado en Estructuras de Acero",
+            company: "Universidad Católica Boliviana (UCB) (800 Horas)"
+          }
+        },
+        skills: {
+          title: '<span class="icon">04.</span> Habilidades Técnicas',
+          cat1: "Modelado & BIM",
+          s1: "BIM Estructuras (Revit)",
+          s2: "Arquitectura & Sitio",
+          s3: "Dynamo (Visual Programming)",
+          s4: "Autodesk Construction Cloud",
+          cat2: "Ingeniería & Cálculo",
+          s5: "Diseño Estructural (Postesados/Metal)",
+          s6: "MIDAS Civil (Puentes)",
+          s7: "CYPE - Arquímedes (Costos)",
+          s8: "Planificación 4D (Synchro Pro)"
+        },
+        lang: {
+          title: '<span class="icon">05.</span> Idiomas',
+          s1: "Español (Nativo)",
+          s2: "Inglés (Básico - Técnico)"
+        },
+        contact: {
+          title: '<span class="icon">06.</span> Contacto'
+        },
+        footer: {
+          text: (year) => `© ${year} Gaston Ricardo Masco Mamani · Ingeniero Civil.`
+        }
+      },
+      en: {
+        pageTitle: "Gaston Ricardo Masco Mamani - Civil Engineer & BIM Specialist",
+        typing: ["structural specialist", "advanced BIM modeler", "automation expert"],
+        localeDetected: (lang) => `// Region: English / International selected (${lang}).`,
+        nav: {
+          about: "About Me",
+          experience: "Experience",
+          education: "Education",
+          skills: "Skills",
+          languages: "Languages",
+          portfolio: "Portfolio ↗",
+          contact: "Contact",
+          export: "EXPORT .PDF"
+        },
+        print: {
+          role: "Civil Engineer | BIM & Structures Specialist"
+        },
+        hero: {
+          rolePrefix: "Civil Engineer | // ",
+          desc: "Civil Engineer specializing in BIM modeling and structural engineering. Expert in process optimization through automation (Dynamo, Revit API) and advanced structural design. Proven track record in large-scale infrastructure and building projects across the US, Spain, Peru, Guatemala, and Bolivia.",
+          btnPortfolio: "VIEW VISUAL PORTFOLIO ↗",
+          btnContact: "GET IN TOUCH",
+          activity: 'Activity <span style="color: var(--text-muted); text-transform:none; font-weight:normal;">last 90 Days</span>',
+          topSkills: "Top Skills",
+          s1: "Structural Specialist",
+          s2: "BIM Coordination",
+          s3: "BIM Modeler",
+          s4: "AI Agents & Workflows"
+        },
+        about: {
+          title: '<span class="icon">01.</span> About Me',
+          desc: "Civil Engineer graduated from Universidad Mayor de San Andrés (UMSA). In-depth expertise in reinforced concrete and structural steel design, coupled with advanced computational structural modeling. My methodology bridges traditional engineering with cutting-edge BIM technologies to solve complex structural behavior.",
+          b1: '<span style="color:var(--accent-color)">▹</span> Reinforced concrete and structural steel design.',
+          b2: '<span style="color:var(--accent-color)">▹</span> Advanced BIM Modeling (LOD 400).',
+          b3: '<span style="color:var(--accent-color)">▹</span> Workflow automation with Dynamo & APIs.',
+          b4: '<span style="color:var(--accent-color)">▹</span> 4D/5D planning and coordination.'
+        },
+        exp: {
+          title: '<span class="icon">02.</span> Professional Experience',
+          p1: {
+            date: "October 2024 — Present",
+            role: "BIM Coordinator, Structural Specialist & BIM Modeler",
+            details: "Spain · Remote · Freelance",
+            desc: "Comprehensive BIM management for real estate investment projects. Implementation of automations with Revit API and custom tool development for workflow optimization.",
+            b1: "BIM process automation using Revit API (C# & Python)",
+            b2: "Optimization of BIM modeling and project data workflows",
+            b3: "Custom plugin development for productivity",
+            b4: "Implementation of corporate BIM standards"
+          },
+          p2: {
+            date: "May 2024 — August 2024",
+            role: "Industrial Plant Automation Specialist",
+            details: "Bolivia · On-site · Full-time",
+            desc: "Process automation and optimization in BIM modeling, quantity takeoffs (QTO), and project budgeting.",
+            b1: "Coordination of construction projects: Cochabamba, La Paz, and Senkata (Ethanol) Plants",
+            b2: "Fabrication and assembly of asphalt diluters and thermal tanks",
+            b3: "Preparation of bidding proposals for government procurement systems (SICOES)",
+            b4: "BIM quantifications with Revit and unit cost analysis"
+          },
+          p3: {
+            date: "September 2022 — May 2023",
+            role: "BIM Implementation Engineer",
+            details: "Bolivia · On-site",
+            desc: "Design of specialized structural elements for the La Paz - El Alto Metropolitan Linear Park.",
+            b1: "Modeling of complex structures for bike paths and pedestrian bridges",
+            b2: "Calculation and structural design of non-conventional structural elements",
+            b3: "Technical coordination with on-site construction teams"
+          },
+          p4: {
+            date: "June 2025 — October 2025",
+            role: "Detailed Engineering - Fuel Reception System",
+            desc: "Design and engineering services for the Villamontes facility."
+          },
+          p5: {
+            date: "September 2024 — October 2024",
+            role: "Structural & BIM Consultant",
+            company: "Independent Consultant",
+            desc: "Bridge BIM Modeling (Peru) and Long-Span Roof Structure Design (Santa Cruz & La Paz).",
+            b1: "BIOSAN Projects: Connection design and foundation calculations",
+            b2: "IMCRUZ: Steel truss roof and plumbing systems BIM modeling",
+            b3: "Spheres Park: Point cloud scan-to-BIM model coordination"
+          },
+          p6: {
+            date: "August 2023 — June 2024",
+            role: "Structural BIM Modeling & Design",
+            company: "MRV Servicios S.R.L. / Freelance",
+            desc: "Industrial and transportation infrastructure projects.",
+            b1: "4D BIM models of 18 viaducts (Unduavi-Chulumani highway)",
+            b2: "Construction engineering and erection design at Gualberto Villarroel Refinery"
+          },
+          p7: {
+            date: "June 2023 — February 2024",
+            role: "Infrastructure BIM Specialist",
+            b1: "Belice II Vehicular Bridge (Guatemala) - BIM Modeling",
+            b2: "Second-Level Hospitals (Villazón, Tupiza, Camiri, Monteagudo)",
+            b3: "Cuartos Operations Center Villazón (Potosí)"
+          },
+          p8: {
+            date: "August 2022 — February 2023",
+            role: "Building & Structural Steel BIM Modeler",
+            b1: "Loritas 10 Tower (35 stories) and Youts Buildings I & II (13 stories)",
+            b2: "Structural Steel: 6 West End Court - Steel Stair (USA)"
+          },
+          p9: {
+            date: "February 2020 — February 2022",
+            role: "Structural Engineering & BIM",
+            company: "Enmarco AEC Project / Graduation Thesis",
+            b1: "Felipe Guaman Poma de Ayala Public School (Ayacucho - PERU)",
+            b2: "Undergraduate Thesis: Structural Analysis & BIM Modeling of San Antonio Building (100/100 Grade)"
+          },
+          p10: {
+            date: "August 2019 — October 2021",
+            role: "Structural Design & Road Infrastructure",
+            company: "Freelance (Collab. Eng. Ronald Lucio Sócrates Ruiz Velasco)",
+            b1: "Sucre Judicial Complex (Supreme Court, Constitutional Court, Attorney General)",
+            b2: "Bridges: Zone 14 Bridge (Guatemala) and Guenda Bridge (Santa Cruz)",
+            b3: "Voluma Condominium (Vega Aguirre Consultores)"
+          }
+        },
+        edu: {
+          title: '<span class="icon">03.</span> Education',
+          c1: {
+            role: "B.S. in Civil Engineering",
+            desc: "Degree obtained in June 2022. Structural Engineering Track."
+          },
+          c2: {
+            role: "Postgraduate Diploma in Bridge Engineering",
+            company: "Siglo XX (800 Hours)"
+          },
+          c3: {
+            role: "Postgraduate Diploma in Structural Steel",
+            company: "Universidad Católica Boliviana (UCB) (800 Hours)"
+          }
+        },
+        skills: {
+          title: '<span class="icon">04.</span> Technical Skills',
+          cat1: "Modeling & BIM",
+          s1: "Structural BIM (Revit)",
+          s2: "Architecture & Site",
+          s3: "Dynamo (Visual Programming)",
+          s4: "Autodesk Construction Cloud",
+          cat2: "Engineering & Structural Analysis",
+          s5: "Structural Design (Post-tensioned/Steel)",
+          s6: "MIDAS Civil (Bridges)",
+          s7: "CYPE - Arquímedes (Cost Estimation)",
+          s8: "4D Planning (Synchro Pro)"
+        },
+        lang: {
+          title: '<span class="icon">05.</span> Languages',
+          s1: "Spanish (Native)",
+          s2: "English (Professional Working / Technical)"
+        },
+        contact: {
+          title: '<span class="icon">06.</span> Contact'
+        },
+        footer: {
+          text: (year) => `© ${year} Gaston Ricardo Masco Mamani · Civil Engineer.`
+        }
+      }
+    };
+
+    function getVal(obj, path) {
+      return path.split('.').reduce((prev, curr) => (prev ? prev[curr] : undefined), obj);
+    }
+
+    let currentLang = 'es';
+    const localeDiv = document.getElementById('localeDetection');
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      try {
+        localStorage.setItem('preferred_lang', lang);
+      } catch(e) {}
+
+      document.documentElement.lang = lang;
+      document.title = translations[lang].pageTitle;
+
+      // Update switcher buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = getVal(translations[lang], key);
+        if (val !== undefined) {
+          if (typeof val === 'function') {
+            el.innerHTML = val(new Date().getFullYear());
+          } else {
+            el.innerHTML = val;
+          }
+        }
+      });
+
+      // Update locale notice
+      if (localeDiv) {
+        const userLang = navigator.language || navigator.userLanguage || 'es';
+        localeDiv.textContent = translations[lang].localeDetected(userLang);
+      }
+
+      // Update typing effect words
+      texts = translations[lang].typing;
+      count = 0;
+      index = 0;
+      isDeleting = false;
+      clearTimeout(typingTimeout);
+      type();
+    }
+
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     // Mobile Nav
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll('.nav-links a:not(.btn-download)').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('active'));
     });
-
-    // Locale Detection
-    const userLang = navigator.language || navigator.userLanguage;
-    const localeDiv = document.getElementById('localeDetection');
-    if (userLang.startsWith('es')) {
-      localeDiv.textContent = `// Región: Hispanohablante detectada (${userLang}).`;
-    } else {
-      localeDiv.textContent = `// Region: International detected (${userLang}).`;
-    }
 
     // Scroll Progress
     const scrollProgress = document.getElementById('scrollProgress');
@@ -637,21 +1140,33 @@
     });
 
     // Typing Effect
-    const texts = ["especialista en estructuras", "modelador BIM avanzado", "experto en automatización"];
+    let texts = translations.es.typing;
     let count = 0; let index = 0; let currentText = ''; let isDeleting = false;
+    let typingTimeout;
     const typingElement = document.getElementById('typingText');
     function type() {
-      if (count === texts.length) count = 0;
+      if (count >= texts.length) count = 0;
       currentText = texts[count];
-      if (isDeleting) { typingElement.textContent = currentText.substring(0, index - 1); index--; }
-      else { typingElement.textContent = currentText.substring(0, index + 1); index++; }
+      if (isDeleting) { 
+        typingElement.textContent = currentText.substring(0, index - 1); 
+        index--; 
+      } else { 
+        typingElement.textContent = currentText.substring(0, index + 1); 
+        index++; 
+      }
       let typeSpeed = 100;
       if (isDeleting) typeSpeed /= 2;
-      if (!isDeleting && index === currentText.length) { typeSpeed = 2000; isDeleting = true; }
-      else if (isDeleting && index === 0) { isDeleting = false; count++; typeSpeed = 500; }
-      setTimeout(type, typeSpeed);
+      if (!isDeleting && index === currentText.length) { 
+        typeSpeed = 2000; 
+        isDeleting = true; 
+      } else if (isDeleting && index === 0) { 
+        isDeleting = false; 
+        count++; 
+        typeSpeed = 500; 
+      }
+      typingTimeout = setTimeout(type, typeSpeed);
     }
-    setTimeout(type, 1000);
+    typingTimeout = setTimeout(type, 1000);
 
     // Reveal Animation
     const reveals = document.querySelectorAll('.reveal');
@@ -691,6 +1206,21 @@
     function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particlesArray.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
     window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
     init(); animate();
+
+    // Initialize Language from Saved Preference or Browser
+    (function initLang() {
+      const savedLang = localStorage.getItem('preferred_lang');
+      if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+        setLanguage(savedLang);
+      } else {
+        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        if (browserLang.startsWith('en')) {
+          setLanguage('en');
+        } else {
+          setLanguage('es');
+        }
+      }
+    })();
   </script>
 </body>
 </html>
