@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -293,8 +293,8 @@
         
         <!-- Pestaña Selector de Idioma ES / EN -->
         <div class="lang-switch-pill" id="langSwitch" role="group" aria-label="Selector de idioma / Language selector">
-          <button type="button" class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
-          <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</button>
+          <button type="button" class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
         </div>
 
         <a href="javascript:window.print()" class="btn-download" data-i18n="nav.export" style="color: var(--accent-color); border: 1px solid var(--accent-color); padding: 4px 12px; border-radius: 4px; margin-left: 0.5rem; font-size: 0.8rem; text-decoration: none;">EXPORTAR .PDF</a>
@@ -1055,7 +1055,7 @@
       return path.split('.').reduce((prev, curr) => (prev ? prev[curr] : undefined), obj);
     }
 
-    let currentLang = 'es';
+    let currentLang = 'en';
     const localeDiv = document.getElementById('localeDetection');
 
     function setLanguage(lang) {
@@ -1145,7 +1145,7 @@
     });
 
     // Typing Effect
-    let texts = translations.es.typing;
+    let texts = translations.en.typing;
     let count = 0; let index = 0; let currentText = ''; let isDeleting = false;
     let typingTimeout;
     const typingElement = document.getElementById('typingText');
@@ -1212,18 +1212,17 @@
     window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
     init(); animate();
 
-    // Initialize Language from Saved Preference or Browser
+    // Initialize Language from URL query param, Saved Preference, or Default to English ('en')
     (function initLang() {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get('lang');
       const savedLang = localStorage.getItem('preferred_lang');
-      if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+      if (urlLang && (urlLang === 'en' || urlLang === 'es')) {
+        setLanguage(urlLang);
+      } else if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
         setLanguage(savedLang);
       } else {
-        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        if (browserLang.startsWith('en')) {
-          setLanguage('en');
-        } else {
-          setLanguage('es');
-        }
+        setLanguage('en');
       }
     })();
   </script>

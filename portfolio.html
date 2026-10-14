@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -169,8 +169,8 @@
       
       <!-- Pestaña Selector de Idioma ES / EN -->
       <div class="lang-switch-pill" id="langSwitch" role="group" aria-label="Selector de idioma / Language selector">
-        <button type="button" class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
-        <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</button>
+        <button type="button" class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
       </div>
     </div>
     <a href="index.html" class="back-btn" data-i18n="header.back">← Volver al CV Principal</a>
@@ -520,7 +520,7 @@
       return path.split('.').reduce((prev, curr) => (prev ? prev[curr] : undefined), obj);
     }
 
-    let currentLang = 'es';
+    let currentLang = 'en';
 
     function setLanguage(lang) {
       if (!translations[lang]) return;
@@ -793,7 +793,7 @@
       });
     });
 
-    // Language Initialization: Check URL param first, then localStorage, then browser language
+    // Language Initialization: Check URL param first, then localStorage, then default to English ('en')
     (function initPortfolioLang() {
       const params = new URLSearchParams(window.location.search);
       const urlLang = params.get('lang');
@@ -804,12 +804,7 @@
       } else if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
         setLanguage(savedLang);
       } else {
-        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        if (browserLang.startsWith('en')) {
-          setLanguage('en');
-        } else {
-          setLanguage('es');
-        }
+        setLanguage('en');
       }
     })();
   </script>
