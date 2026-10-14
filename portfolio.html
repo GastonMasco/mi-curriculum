@@ -182,6 +182,7 @@
     <button class="filter-btn" data-filter="hormigon" data-i18n="filters.hormigon">Hormigón Armado</button>
     <button class="filter-btn" data-filter="puentes" data-i18n="filters.puentes">Puentes</button>
     <button class="filter-btn" data-filter="arquitectura" data-i18n="filters.arquitectura">Reformas & Nube de Puntos</button>
+    <button class="filter-btn" data-filter="hidrosanitarias" data-i18n="filters.hidrosanitarias">Instalaciones Hidrosanitarias</button>
     <button class="filter-btn" data-filter="analisis" data-i18n="filters.analisis">Cálculos & Diseños</button>
     <button class="filter-btn" data-filter="automatizacion" data-i18n="filters.automatizacion">Automatización</button>
   </div>
@@ -268,7 +269,22 @@
       </div>
     </div>
 
-    <!-- 6. Automatización -->
+    <!-- 6. Instalaciones Hidrosanitarias -->
+    <div class="project-card" data-category="hidrosanitarias">
+      <div class="project-preview">
+        <img src="INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S1 - AGUA FRIA  SUBSUELO.jpg" alt="Instalaciones Hidrosanitarias" onerror="this.src='https://via.placeholder.com/400x200/161412/eebc5d?text=Instalaciones+Hidrosanitarias'">
+      </div>
+      <div class="project-content">
+        <div class="project-category" data-i18n="pHidro.cat">Instalaciones Hidrosanitarias</div>
+        <h2 class="project-title" data-i18n="pHidro.title">Sistemas Hidrosanitarios - IMCRUZ</h2>
+        <p class="project-desc" data-i18n="pHidro.desc">Planos y modelado técnico de instalaciones hidrosanitarias: agua fría, desagüe sanitario y drenaje pluvial para subsuelo y niveles superiores.</p>
+        <div class="project-links" style="grid-template-columns: 1fr;">
+          <a href="javascript:void(0)" class="btn btn-visor" onclick="openGallery('hidrosanitarias')" data-i18n="btn.gallery6" style="background: var(--accent-color); color: var(--bg-color); font-weight: 700;">Ver Galería de Planos (6)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Automatización -->
     <div class="project-card" data-category="automatizacion">
       <div class="project-preview"><img src="https://via.placeholder.com/400x200/161412/eebc5d?text=Automatización" alt=""></div>
       <div class="project-content">
@@ -281,7 +297,7 @@
       </div>
     </div>
 
-    <!-- 7. Análisis & Cálculo -->
+    <!-- 8. Análisis & Cálculo -->
     <div class="project-card" data-category="analisis">
       <div class="project-preview"><img src="https://via.placeholder.com/400x200/161412/eebc5d?text=Memorias+de+Cálculo" alt=""></div>
       <div class="project-content">
@@ -350,6 +366,7 @@
           hormigon: "Hormigón Armado",
           puentes: "Puentes",
           arquitectura: "Reformas & Nube de Puntos",
+          hidrosanitarias: "Instalaciones Hidrosanitarias",
           analisis: "Cálculos & Diseños",
           automatizacion: "Automatización"
         },
@@ -359,7 +376,8 @@
           gallery3: "Ver Galería (3)",
           gallery15: "Ver Galería (15)",
           gallery11: "Ver Galería (11)",
-          gallery8: "Ver Galería (8)"
+          gallery8: "Ver Galería (8)",
+          gallery6: "Ver Galería de Planos (6)"
         },
         p1: {
           cat: "Estructuras Metálicas",
@@ -385,6 +403,11 @@
           cat: "Modelado Arquitectura",
           title: "Reformas sobre Nube de Puntos",
           desc: "Levantamiento y remodelación arquitectónica a partir de escaneo láser y nubes de puntos."
+        },
+        pHidro: {
+          cat: "Instalaciones Hidrosanitarias",
+          title: "Sistemas Hidrosanitarios - IMCRUZ",
+          desc: "Planos y modelado técnico de instalaciones hidrosanitarias: agua fría, desagüe sanitario y drenaje pluvial para subsuelo y niveles superiores."
         },
         p6: {
           cat: "Programación & Automatización",
@@ -423,6 +446,7 @@
           hormigon: "Reinforced Concrete",
           puentes: "Bridges & Infra",
           arquitectura: "Point Cloud & Scan-to-BIM",
+          hidrosanitarias: "Plumbing & Sanitary",
           analisis: "Structural Calculations",
           automatizacion: "Automation"
         },
@@ -432,7 +456,8 @@
           gallery3: "View Gallery (3)",
           gallery15: "View Gallery (15)",
           gallery11: "View Gallery (11)",
-          gallery8: "View Gallery (8)"
+          gallery8: "View Gallery (8)",
+          gallery6: "View Blueprint Gallery (6)"
         },
         p1: {
           cat: "Steel Structures",
@@ -458,6 +483,11 @@
           cat: "Architecture & Scan-to-BIM",
           title: "Point Cloud Scan-to-BIM Renovations",
           desc: "Architectural as-built surveying and renovation design based on 3D laser scan point clouds."
+        },
+        pHidro: {
+          cat: "Plumbing & Sanitary Systems",
+          title: "Plumbing & Sanitary Systems - IMCRUZ",
+          desc: "Technical blueprints and BIM plumbing modeling: domestic cold water distribution, sanitary sewer, and stormwater drainage systems."
         },
         p6: {
           cat: "Programming & Automation",
@@ -529,6 +559,20 @@
 
     // Proyectos Data
     const galleries = {
+      hidrosanitarias: {
+        title: {
+          es: "Instalaciones Hidrosanitarias - IMCRUZ",
+          en: "Plumbing & Sanitary Systems - IMCRUZ"
+        },
+        images: [
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S1 - AGUA FRIA  SUBSUELO.jpg",
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S2 - AGUA FRIA  SUBSUELO Y NIVELES SUPERIORES.jpg",
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S3 - DESAGUE SANITARIO Y PLUVIAL-NIVEL SUBSUELO.jpg",
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S4 - DESAGUE SANITARIO Y PLUVIAL-NIVEL 1.jpg",
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S5 - DESAGUE SANITARIO Y PLUVIAL-NIVEL 1.jpg",
+          "INSTALACIONES HIDROSANITARIAS/PP-IMCRUZ-SAN-ZZ-ZZ - Plano - S6 - DESAGUE SANITARIO Y PLUVIAL-NIVEL 2.jpg"
+        ]
+      },
       guatemala: {
         title: {
           es: "Proyecto Vial - Guatemala",
